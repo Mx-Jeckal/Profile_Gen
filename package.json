@@ -1,0 +1,25 @@
+{
+  "name": "profile_gen",
+  "version": "1.0.0",
+  "description": "generate a github profile and publish as pdf",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mx-Jeckal/Profile_Gen.git"
+  },
+  "keywords": [
+    "awesome"
+  ],
+  "author": "Hazel Tuxhorn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mx-Jeckal/Profile_Gen/issues"
+  },
+  "homepage": "https://github.com/Mx-Jeckal/Profile_Gen#readme",
+  "dependencies": {
+    "html5-to-pdf": "^3.2.0"
+  }
+}
