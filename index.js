@@ -1,7 +1,6 @@
 var inquirer = require('inquirer')
 var axios = require('axios')
 var HtmlTool = require('./generateHTML')
-var util = require("util")
 var fs = require("fs")
 var pdf = require('html-pdf');
 require("dotenv").config()
@@ -20,25 +19,17 @@ const questions = [{
             return val.toLowerCase();
         }
     }
-
 ];
-
-
-// function writeToFile(fileName, data) {
-
-// }
 
 function init() {
     inquirer.prompt(questions)
         .then(answers => {
-            console.log(answers)
             let baseHtml = HtmlTool.generateHTML(answers)
 
 
             axios
                 .get('https://api.github.com/users/' + answers.github_user + "?client_id=" + process.env.CLIENT_ID + "&client_secret=" + process.env.CLIENT_SECRET)
                 .then(function(response) {
-                    console.log(response);
 
                     let addHTML = ` 
             <div class="wrapper">
@@ -89,11 +80,9 @@ function init() {
 
 
                     .catch(function(error) {
-                            console.log("you got an error: " + error);
-                        })
-                        // .finally(function() {
-                        //     // always executed
-                        // });
+                        console.log("you got an error: " + error);
+                    })
+
                 })
         })
 }
