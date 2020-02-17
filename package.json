@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Mx-Jeckal/Profile_Gen#readme",
   "dependencies": {
+    "html-pdf": "^2.2.0",
     "html5-to-pdf": "^3.2.0"
   }
 }

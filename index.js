@@ -3,8 +3,7 @@ var axios = require('axios')
 var HtmlTool = require('./generateHTML')
 var util = require("util")
 var fs = require("fs")
-    // const HTML5ToPDF = require("./node_modules/puppeteer/lib")
-const path = require("path")
+var pdf = require('html-pdf');
 require("dotenv").config()
 
 const questions = [{
@@ -25,9 +24,9 @@ const questions = [{
 ];
 
 
-function writeToFile(fileName, data) {
+// function writeToFile(fileName, data) {
 
-}
+// }
 
 function init() {
     inquirer.prompt(questions)
@@ -80,53 +79,23 @@ function init() {
                         // write the content of baseHtml to myFile.html
                         // convert the html file into pdf
 
+                    var html = fs.readFileSync('./index.html', 'utf8');
+                    var options = { format: 'Letter' };
 
-                    const run = async() => {
-                        const html5ToPDF = new HTML5ToPDF({
-                            inputPath: path.join(__dirname, "..", "index.html"),
-                            outputPath: path.join(__dirname, "..", "tmp", "profile.pdf"),
-                            // templatePath: path.join(__dirname, "templates", "basic"),
-                            // include: [
-                            //     path.join(__dirname, "assets", "basic.css"),
-                            //     path.join(__dirname, "assets", "custom-margin.css"),
-                            // ],
+                    pdf.create(html, options).toFile('./profile.pdf', function(err, res) {
+                        if (err) return console.log(err);
+                        console.log(res); // { filename: '/app/businesscard.pdf' }
+                    })
+
+
+                    .catch(function(error) {
+                            console.log("you got an error: " + error);
                         })
-
-                        await html5ToPDF.start()
-                        await html5ToPDF.build()
-                        await html5ToPDF.close()
-                        console.log("DONE")
-                        process.exit(0)
-                    }
-
-
-                    // Use the function in an existing promise chain
-                    Promise.resolve('something')
-                        .then(result => {
-                            return doSomething(result)
-                        })
-                        .then(result => {
-                            // Because async functions are promises under the hood we can treat the run function as a promise
-                            return run()
-                        })
-                        .catch(handleErrors)
-
-                    // Usage in try/catch block
-                    try {
-                        run()
-                    } catch (error) {
-                        console.error(error)
-                    }
-
-
+                        // .finally(function() {
+                        //     // always executed
+                        // });
                 })
-                .catch(function(error) {
-                    console.log("you got an error: " + error);
-                })
-                .finally(function() {
-                    // always executed
-                });
         })
 }
 
-init();
+init()
